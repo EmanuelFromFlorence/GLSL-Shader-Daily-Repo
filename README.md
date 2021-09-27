@@ -1,2 +1,2 @@
 # Shader-Daily-Repo
-@shader_everyday
+Twitter: @shader_everyday
