@@ -1,8 +1,8 @@
 import './style.css'
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import fragment from './shaders/26/fragment.glsl'
-import vertex from './shaders/26/vertex.glsl'
+import * as THREE from "three"
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
+import fragment from './Shaders/50/fragment.glsl'
+import vertex from './Shaders/50/vertex.glsl'
 const canvas = document.querySelector('.webgl')
 
 class NewScene{
@@ -12,60 +12,95 @@ class NewScene{
     
     _Init(){
         this.scene = new THREE.Scene()
-        this.InitShaderPlane()
-        //this.InitShaderCube()
-        console.log(fragment)
-        //this.InitTexture()
+        this.time = new THREE.Clock()
+        console.log(this.time.getElapsedTime())
+        this.oldTime = 0
+        this.InitTextShader()
+        //this.InitShader()
         this.InitCamera()
-        this.InitLights()
+        //this.InitLights()
         this.InitRenderer()
-        //this.InitControls()
-        this.InitMouseMove()
-        this.InitTime()
+        this.InitControls()
         this.Update()
         window.addEventListener('resize', () => {
             this.Resize()
-        })     
-    }
-
-    InitTexture(){
-        this.textureLoader = new THREE.TextureLoader()
-        this.matrixTexture = this.textureLoader.load('./img/texture.png')
-        //console.log(this.matrixTexture)
-    }
-
-    InitShaderPlane(){
-        this.geometry = new THREE.PlaneBufferGeometry(2, 2)
-        this.material = new THREE.ShaderMaterial({
-            side: THREE.DoubleSide,
-            fragmentShader: fragment,
-            vertexShader: vertex,
-            uniforms: {
-                u_resolution: { value: new THREE.Vector2()},
-                u_time: { value: 1.0 },
-                u_mouse: { value: new THREE.Vector2()}
-            }
         })
-        this.mesh = new THREE.Mesh(this.geometry, this.material)
-        this.scene.add(this.mesh)
     }
 
-    InitShaderCube(){
-        this.geometry = new THREE.BoxBufferGeometry(2, 2, 2)
-        this.material = new THREE.ShaderMaterial({
-            side: THREE.DoubleSide,
-            fragmentShader: fragment,
-            vertexShader: vertex,
-            uniforms: {
-                u_resolution: { value: new THREE.Vector2()},
-                u_time: { value: 1.0 },
-                u_mouse: { value: new THREE.Vector2()}
+    InitTextShader(){
+        this.fontLoader = new THREE.FontLoader()
+        this.fontLoader.load(
+            'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/fonts/helvetiker_bold.typeface.json',
+            (font) => {
+                this.textParameters = {
+                    font: font,
+                    size: 2.0,
+                    height: 0.8,
+                    curveSegments: 12,
+                    bevelEnabled: true,
+                    bevelThickness: 0.03,
+                    bevelSize: 0.02,
+                    bevelOffset: 0,
+                    bevelSegments: 5
+                }
+                this.textGeometry = new THREE.TextGeometry(
+                    '50',
+                    this.textParameters
+                )
+                this.textMaterial = new THREE.ShaderMaterial({
+                    transparent: true,
+                    side: THREE.DoubleSide,
+                    vertexShader: vertex,
+                    fragmentShader: fragment,
+                    uniforms: {
+                        u_time: { value: 1.0 },
+                        u_resolution: { type: "v2", value: new THREE.Vector2() },
+                        u_mouse: { type: "v2", value: new THREE.Vector2() }
+                    } 
+                })
+                console.log(fragment)
+                this.textMesh = new THREE.Mesh(this.textGeometry, this.textMaterial)
+                this.scene.add(this.textMesh)
+                this.textGeometry.computeBoundingBox()
+                this.textGeometry.center()
             }
-        })
-        this.mesh = new THREE.Mesh(this.geometry, this.material)
-        this.scene.add(this.mesh)
+        )
     }
-    
+
+    // InitShader(){
+    //     //this.geometry = new THREE.BoxGeometry(2, 2, 2)
+    //     this.geometry = new THREE.PlaneBufferGeometry(2, 2)
+    //     this.material = new THREE.ShaderMaterial({
+    //         transparent: true,
+    //         side: THREE.DoubleSide,
+    //         vertexShader: vertex,
+    //         fragmentShader: fragment,
+    //         uniforms: {
+    //             u_time: { type: "f", value: 1.0 },
+    //             u_resolution: { type: "v2", value: new THREE.Vector2() },
+    //             u_mouse: { type: "v2", value: new THREE.Vector2() }
+    //         } 
+    //     })
+    //     console.log(fragment)
+    //     this.mesh = new THREE.Mesh(this.geometry, this.material)
+    //     this.scene.add(this.mesh)
+    //     document.onmousemove = (e) => {
+    //         this.material.uniforms.u_mouse.value.x = e.pageX
+    //         this.material.uniforms.u_mouse.value.y = e.pageY
+    //     }  
+    // }
+
+    InitCamera(){
+        this.camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 100)
+        this.camera.position.z = 5
+        this.scene.add(this.camera)
+    }
+
+    InitLights(){
+        this.ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+        this.scene.add(this.ambientLight)
+    }
+
     InitRenderer(){
         this.renderer = new THREE.WebGLRenderer({
             canvas,
@@ -73,21 +108,11 @@ class NewScene{
         })
         this.renderer.shadowMap.enabled = true
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
+        this.renderer.setClearColor(0x001219)
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
         this.renderer.setSize(window.innerWidth, window.innerHeight)
         this.renderer.render(this.scene, this.camera)
-        this.renderer.setClearColor(0x191919)
-    }
-
-    InitCamera(){
-        this.camera = new THREE.PerspectiveCamera(100, window.innerWidth/window.innerHeight, 0.1, 100)
-        this.camera.position.z = 1
-        this.scene.add(this.camera)
-    }
-
-    InitLights(){
-        this.ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
-        this.scene.add(this.ambientLight)
+        
     }
 
     InitControls(){
@@ -97,39 +122,35 @@ class NewScene{
         this.controls.autoRotate = true
     }
 
-    InitMouseMove(){
-        document.onmousemove = (e) =>{
-              this.material.uniforms.u_mouse.value.x = e.pageX
-              this.material.uniforms.u_mouse.value.y = e.pageY
-        }
+    InitTime(){
+        this.time = new THREE.Clock()
     }
 
     Resize(){
         this.camera.aspect = window.innerWidth / window.innerHeight
         this.camera.updateProjectionMatrix()
         this.renderer.setSize(window.innerWidth, window.innerHeight)
-        this.material.uniforms.u_resolution.value.x = canvas.width;
-        this.material.uniforms.u_resolution.value.y = canvas.height;
-    }
-
-    InitTime(){
-        this.clock = new THREE.Clock()
+        this.textMaterial.uniforms.u_resolution.value.x = canvas.width
+        this.textMaterial.uniforms.u_resolution.value.y = canvas.height
+        //console.log(this.material.uniforms.u_resolution.value)
     }
 
     Update(){
-        requestAnimationFrame(() => {     
+        requestAnimationFrame(() => {
+            this.elapsedTime = this.time.getElapsedTime()
+            //console.log(this.elapsedTime)
+            this.deltaTime = this.elapsedTime - this.oldTime
+            this.oldTime = this.elapsedTime
+            this.controls.update()
+            this.textMaterial.uniforms.u_time.value += this.deltaTime
             this.renderer.render(this.scene, this.camera)
-            //this.controls.update()
             this.Update()
-            this.material.uniforms.u_time.value += this.clock.getDelta()
         })  
     }
-    
 }
 
 let _APP = null
 
 window.addEventListener('DOMContentLoaded', () => {
     _APP = new NewScene()
-    
 })
