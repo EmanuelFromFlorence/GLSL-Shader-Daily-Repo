@@ -2,12 +2,12 @@ varying vec2 vUv;
 
 uniform float u_time;
 
-// YUV to RGB matrix
+// YUV to RGB matrix book of shaders
 mat3 yuv2rgb=mat3(1.,0.,1.13983,
     1.,-.39465,-.58060,
     1.,2.03211,0.);
 
-// RGB to YUV matrix
+// RGB to YUV matrix book of shaders
 mat3 rgb2yuv=mat3(.2126,.7152,.0722,
     -.09991,-.33609,.43600,
     .615,-.5586,-.05639);
