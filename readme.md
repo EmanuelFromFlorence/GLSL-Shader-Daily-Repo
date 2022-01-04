@@ -1,3 +1,3 @@
-Open terminal and enter
-1. npm install
-2. npm run dev
+1. Terminal: npm install
+2. Change script.js fragment and vertex shader number
+3. npm run dev :)
