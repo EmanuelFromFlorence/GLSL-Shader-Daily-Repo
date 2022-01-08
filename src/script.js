@@ -1,8 +1,8 @@
 import './style.css'
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/129/fragment.glsl'
-import vertex from './Shaders/129/vertex.glsl'
+import fragment from './Shaders/130/fragment.glsl'
+import vertex from './Shaders/130/vertex.glsl'
 const canvas = document.querySelector('.webgl')
 
 class NewScene{
@@ -13,7 +13,7 @@ class NewScene{
     _Init(){
         this.scene = new THREE.Scene()
         this.time = new THREE.Clock()
-        console.log(this.time.getElapsedTime())
+        //console.log(this.time.getElapsedTime())
         this.oldTime = 0
         //this.InitTextShader()
         this.InitShader()
@@ -130,8 +130,8 @@ class NewScene{
         this.camera.aspect = window.innerWidth / window.innerHeight
         this.camera.updateProjectionMatrix()
         this.renderer.setSize(window.innerWidth, window.innerHeight)
-        this.textMaterial.uniforms.u_resolution.value.x = canvas.width
-        this.textMaterial.uniforms.u_resolution.value.y = canvas.height
+        //this.textMaterial.uniforms.u_resolution.value.x = canvas.width
+        //this.textMaterial.uniforms.u_resolution.value.y = canvas.height
         //console.log(this.material.uniforms.u_resolution.value)
     }
 
