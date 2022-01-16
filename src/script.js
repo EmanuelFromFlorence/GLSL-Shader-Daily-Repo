@@ -20,7 +20,7 @@ class NewScene{
         this.InitCamera()
         //this.InitLights()
         this.InitRenderer()
-        //this.InitControls()
+        this.InitControls()
         this.Update()
         window.addEventListener('resize', () => {
             this.Resize()
@@ -68,8 +68,8 @@ class NewScene{
     // }
 
     InitShader(){
-        //this.geometry = new THREE.BoxGeometry(2, 2, 2)
-        this.geometry = new THREE.PlaneBufferGeometry(2, 2)
+        this.geometry = new THREE.BoxGeometry(2, 2, 2)
+        //this.geometry = new THREE.PlaneBufferGeometry(2, 2)
         this.material = new THREE.ShaderMaterial({
             transparent: true,
             side: THREE.DoubleSide,
@@ -92,7 +92,7 @@ class NewScene{
 
     InitCamera(){
         this.camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 100)
-        this.camera.position.z = 3
+        this.camera.position.z = 5
         this.scene.add(this.camera)
     }
 
@@ -141,7 +141,7 @@ class NewScene{
             //console.log(this.elapsedTime)
             this.deltaTime = this.elapsedTime - this.oldTime
             this.oldTime = this.elapsedTime
-            //this.controls.update()
+            this.controls.update()
             this.material.uniforms.u_time.value += this.deltaTime
             this.renderer.render(this.scene, this.camera)
             this.Update()
