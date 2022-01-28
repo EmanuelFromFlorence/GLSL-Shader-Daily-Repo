@@ -1,8 +1,8 @@
 import './style.css'
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/149/fragment.glsl'
-import vertex from './Shaders/149/vertex.glsl'
+import fragment from './Shaders/150/fragment.glsl'
+import vertex from './Shaders/150/vertex.glsl'
 const canvas = document.querySelector('.webgl')
 
 class NewScene{
@@ -15,57 +15,57 @@ class NewScene{
         this.time = new THREE.Clock()
         //console.log(this.time.getElapsedTime())
         this.oldTime = 0
-        //this.InitTextShader()
-        this.InitShader()
+        this.InitTextShader()
+        //this.InitShader()
         this.InitCamera()
         //this.InitLights()
         this.InitRenderer()
-        //this.InitControls()
+        this.InitControls()
         this.Update()
         window.addEventListener('resize', () => {
             this.Resize()
         })
     }
 
-    // InitTextShader(){
-    //     this.fontLoader = new THREE.FontLoader()
-    //     this.fontLoader.load(
-    //         'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/fonts/helvetiker_bold.typeface.json',
-    //         (font) => {
-    //             this.textParameters = {
-    //                 font: font,
-    //                 size: 2.0,
-    //                 height: 0.8,
-    //                 curveSegments: 12,
-    //                 bevelEnabled: true,
-    //                 bevelThickness: 0.03,
-    //                 bevelSize: 0.02,
-    //                 bevelOffset: 0,
-    //                 bevelSegments: 5
-    //             }
-    //             this.textGeometry = new THREE.TextGeometry(
-    //                 '50',
-    //                 this.textParameters
-    //             )
-    //             this.textMaterial = new THREE.ShaderMaterial({
-    //                 transparent: true,
-    //                 side: THREE.DoubleSide,
-    //                 vertexShader: vertex,
-    //                 fragmentShader: fragment,
-    //                 uniforms: {
-    //                     u_time: { value: 1.0 },
-    //                     u_resolution: { type: "v2", value: new THREE.Vector2() },
-    //                     u_mouse: { type: "v2", value: new THREE.Vector2() }
-    //                 } 
-    //             })
-    //             console.log(fragment)
-    //             this.textMesh = new THREE.Mesh(this.textGeometry, this.textMaterial)
-    //             this.scene.add(this.textMesh)
-    //             this.textGeometry.computeBoundingBox()
-    //             this.textGeometry.center()
-    //         }
-    //     )
-    // }
+    InitTextShader(){
+        this.fontLoader = new THREE.FontLoader()
+        this.fontLoader.load(
+            'Sunf_Bold.json',
+            (font) => {
+                this.textParameters = {
+                    font: font,
+                    size: 2.0,
+                    height: 0.5,
+                    curveSegments: 12,
+                    bevelEnabled: true,
+                    bevelThickness: 0.03,
+                    bevelSize: 0.02,
+                    bevelOffset: 0,
+                    bevelSegments: 5
+                }
+                this.textGeometry = new THREE.TextGeometry(
+                    '150',
+                    this.textParameters
+                )
+                this.textMaterial = new THREE.ShaderMaterial({
+                    transparent: true,
+                    side: THREE.DoubleSide,
+                    vertexShader: vertex,
+                    fragmentShader: fragment,
+                    uniforms: {
+                        u_time: { value: 1.0 },
+                        u_resolution: { type: "v2", value: new THREE.Vector2() },
+                        u_mouse: { type: "v2", value: new THREE.Vector2() }
+                    } 
+                })
+                console.log(fragment)
+                this.textMesh = new THREE.Mesh(this.textGeometry, this.textMaterial)
+                this.scene.add(this.textMesh)
+                this.textGeometry.computeBoundingBox()
+                this.textGeometry.center()
+            }
+        )
+    }
 
     InitShader(){
         //this.geometry = new THREE.BoxGeometry(2, 2, 2)
@@ -92,7 +92,7 @@ class NewScene{
 
     InitCamera(){
         this.camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 100)
-        this.camera.position.z = 3
+        this.camera.position.z = 5
         this.scene.add(this.camera)
     }
 
@@ -119,7 +119,7 @@ class NewScene{
         this.controls = new OrbitControls(this.camera, canvas)
         this.controls.enableDamping = true
         this.controls.update()
-        //this.controls.autoRotate = true
+        this.controls.autoRotate = true
     }
 
     InitTime(){
@@ -141,8 +141,11 @@ class NewScene{
             //console.log(this.elapsedTime)
             this.deltaTime = this.elapsedTime - this.oldTime
             this.oldTime = this.elapsedTime
-           //this.controls.update()
-            this.material.uniforms.u_time.value += this.deltaTime
+           this.controls.update()
+            //this.material.uniforms.u_time.value += this.deltaTime
+            if (this.textMaterial){
+                this.textMaterial.uniforms.u_time.value += this.deltaTime
+            }
             this.renderer.render(this.scene, this.camera)
             this.Update()
         })  
