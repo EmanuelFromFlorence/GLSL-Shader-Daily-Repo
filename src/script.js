@@ -1,8 +1,8 @@
 import './style.css'
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/158/fragment.glsl'
-import vertex from './Shaders/158/vertex.glsl'
+import fragment from './Shaders/160/fragment.glsl'
+import vertex from './Shaders/160/vertex.glsl'
 const canvas = document.querySelector('.webgl')
 
 class NewScene{
@@ -13,6 +13,7 @@ class NewScene{
     _Init(){
         this.scene = new THREE.Scene()
         this.time = new THREE.Clock()
+        this.num = Math.random()
         //console.log(this.time.getElapsedTime())
         this.oldTime = 0
         //this.InitTextShader()
@@ -54,6 +55,7 @@ class NewScene{
                     fragmentShader: fragment,
                     uniforms: {
                         u_time: { value: 1.0 },
+                        u_rand: { value: 0},
                         u_resolution: { type: "v2", value: new THREE.Vector2() },
                         u_mouse: { type: "v2", value: new THREE.Vector2() }
                     } 
@@ -77,6 +79,7 @@ class NewScene{
             fragmentShader: fragment,
             uniforms: {
                 u_time: { type: "f", value: 1.0 },
+                u_rand: { value: 0},
                 u_resolution: { type: "v2", value: new THREE.Vector2() },
                 u_mouse: { type: "v2", value: new THREE.Vector2() }
             } 
@@ -146,6 +149,8 @@ class NewScene{
             if (this.textMaterial){
                 this.textMaterial.uniforms.u_time.value += this.deltaTime
             }
+            this.num = Math.random()
+            this.material.uniforms.u_rand.value = this.num
             this.renderer.render(this.scene, this.camera)
             this.Update()
         })  
