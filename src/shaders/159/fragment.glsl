@@ -34,7 +34,7 @@ void main(){
     vec2 vel = vec2(u_time * 2. * max(grid.x, grid.y));
     vel *= vec2(-1., 0.0) * rand(1.+ipos.y);
     vec2 vel2=vec2(u_time*2.*max(grid.x,grid.y));
-    vel2*=vec2(0.,1. * sin(u_time * 0.2))*rand(1.+ipos.x);
+    vel2*=vec2(0.,1.)*rand(1.+ipos.x);
     vec2 offset = vec2(0.1, 0.);
     float y = pattern(vUv, vel, 0.75);
     float x=pattern(vUv,vel2,.95);
