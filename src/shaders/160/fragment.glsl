@@ -36,13 +36,20 @@ float plot2(vec2 vUv, float p){
            smoothstep(p, p + 0.075, vUv.x);
 }
 
+float cir(vec2 vUv, vec2 pos, float size){
+    return 1. - smoothstep(size, size + 0.01, distance(vUv, pos));
+}
+
 
 void main(){
     vec2 vUv = vec2(vUv.x, vUv.y);
     vec3 color = vec3(0.);
-    vUv *= 1.;
-    float y = sin(plot(vUv, u_rand)) * 500.;
-    float x = sin(plot2(vUv, u_rand)) * 500.;
-    color = vec3(y + x);
+    vUv *= 2.;
+    float y = sin(plot(vUv, u_time * u_rand)) * 500.;
+    y*= cir(vUv, vec2(1.), 1.);
+    float x = sin(plot2(vUv, u_time * u_rand)) * 500.;
+    x*= cir(vUv, vec2(1.), 1.);
+    color = (1.0 - y) * color + y * vec3(0.0, 1.0, 0.0);
+    color += (1.0 - x) * color + x * vec3(0.0, 1.0, 0.0);
     gl_FragColor = vec4(color, 1.);
 }

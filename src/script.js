@@ -127,6 +127,7 @@ class NewScene{
 
     InitTime(){
         this.time = new THREE.Clock()
+        
     }
 
     Resize(){
@@ -149,7 +150,12 @@ class NewScene{
             if (this.textMaterial){
                 this.textMaterial.uniforms.u_time.value += this.deltaTime
             }
-            this.num = Math.random()
+            
+            this.interval = setInterval(() => {
+                clearInterval()
+                this.num = Math.random()
+            }, 1000)
+            
             this.material.uniforms.u_rand.value = this.num
             this.renderer.render(this.scene, this.camera)
             this.Update()
