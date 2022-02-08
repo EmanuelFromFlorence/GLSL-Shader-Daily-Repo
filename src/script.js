@@ -1,8 +1,8 @@
 import './style.css'
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/160/fragment.glsl'
-import vertex from './Shaders/160/vertex.glsl'
+import fragment from './Shaders/161/fragment.glsl'
+import vertex from './Shaders/161/vertex.glsl'
 const canvas = document.querySelector('.webgl')
 
 class NewScene{
@@ -156,7 +156,7 @@ class NewScene{
                 this.num = Math.random()
             }, 1000)
             
-            this.material.uniforms.u_rand.value = this.num
+            this.material.uniforms.u_rand.value = this.num 
             this.renderer.render(this.scene, this.camera)
             this.Update()
         })  
