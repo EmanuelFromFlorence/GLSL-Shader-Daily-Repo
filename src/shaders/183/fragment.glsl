@@ -43,14 +43,24 @@ float Cir(vec2 vUv, vec2 pos, float size){
 
 void main(){
     vec2 vUv = vec2(vUv.x, vUv.y);
-    vUv -= 0.5;
+    //vUv -= 0.5;
     vec3 color = vec3(0.);
     vec2 pos = vUv.yx*vec2(10.,3.);
+    pos -= vec2(5., 1.5);
     float p = pos.x;
     pos = rotate2d(noise2(pos + u_time)) * pos;
     //p = Cir(pos, vec2(0.75), 0.45);
     p += lines(pos, .5);
-    color.b = (.9 - p * 1.23);
-    color.b -= sin(u_time * 0.25);
+    float r = smoothstep(0.4, 0.6, vUv.y * p);
+    float b = smoothstep(0.4, 0.6, 1. - vUv.y * p);
+    color.b = p * 0.025 * b;
+    color.b += 1. * r + p * 2. ;
+    //color.b = 1.0 * r;
+    //color.rg = vec2(p * b);
+    color.rg += (.8 - p * 1.23);
+    //color.rg += (.9 - p * 1.23);
+    //color.g = step(0.5, 1.);
+    //color.rg = vec2(1., 1.);
+    //color.b -= sin(u_time * 0.25);
     gl_FragColor = vec4(color, 1.);
 }
