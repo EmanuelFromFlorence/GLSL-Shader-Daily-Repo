@@ -115,6 +115,7 @@ class NewScene{
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
         this.renderer.setSize(window.innerWidth, window.innerHeight)
         this.renderer.render(this.scene, this.camera)
+        this.renderer.outputEncoding = THREE.sRGBEncoding
         
     }
 
