@@ -1,8 +1,8 @@
 import './style.css'
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/199/fragment.glsl'
-import vertex from './Shaders/199/vertex.glsl'
+import fragment from './Shaders/200/fragment.glsl'
+import vertex from './Shaders/200/vertex.glsl'
 const canvas = document.querySelector('.webgl')
 
 class NewScene{
@@ -16,12 +16,12 @@ class NewScene{
         this.num = Math.random()
         //console.log(this.time.getElapsedTime())
         this.oldTime = 0
-        //this.InitTextShader()
-        this.InitShader()
+        this.InitTextShader()
+        //this.InitShader()
         this.InitCamera()
         //this.InitLights()
         this.InitRenderer()
-        //this.InitControls()
+        this.InitControls()
         this.Update()
         window.addEventListener('resize', () => {
             this.Resize()
@@ -45,7 +45,7 @@ class NewScene{
                     bevelSegments: 5
                 }
                 this.textGeometry = new THREE.TextGeometry(
-                    '150',
+                    '200',
                     this.textParameters
                 )
                 this.textMaterial = new THREE.ShaderMaterial({
@@ -95,7 +95,7 @@ class NewScene{
 
     InitCamera(){
         this.camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 100)
-        this.camera.position.z = 3
+        this.camera.position.z = 5
         this.scene.add(this.camera)
     }
 
@@ -123,7 +123,7 @@ class NewScene{
         this.controls = new OrbitControls(this.camera, canvas)
         this.controls.enableDamping = true
         this.controls.update()
-        this.controls.autoRotate = true
+        //this.controls.autoRotate = true
     }
 
     InitTime(){
@@ -144,12 +144,15 @@ class NewScene{
         requestAnimationFrame(() => {
             this.elapsedTime = this.time.getElapsedTime()
             //console.log(this.elapsedTime)
+            
             this.deltaTime = this.elapsedTime - this.oldTime
             this.oldTime = this.elapsedTime
-           //this.controls.update()
-            this.material.uniforms.u_time.value += this.deltaTime
+            this.controls.update()
+            //this.material.uniforms.u_time.value += this.deltaTime
             if (this.textMaterial){
                 this.textMaterial.uniforms.u_time.value += this.deltaTime
+                //this.textMesh.rotation.y += 0.005
+                
             }
             
             this.interval = setInterval(() => {
@@ -157,7 +160,7 @@ class NewScene{
                 this.num = Math.random()
             }, 1000)
             
-            this.material.uniforms.u_rand.value = this.num 
+            //this.material.uniforms.u_rand.value = this.num 
             this.renderer.render(this.scene, this.camera)
             this.Update()
         })  
