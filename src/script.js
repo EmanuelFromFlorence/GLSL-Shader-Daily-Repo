@@ -1,8 +1,8 @@
 import './style.css'
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/200/fragment.glsl'
-import vertex from './Shaders/200/vertex.glsl'
+import fragment from './Shaders/201/fragment.glsl'
+import vertex from './Shaders/201/vertex.glsl'
 const canvas = document.querySelector('.webgl')
 
 class NewScene{
@@ -16,12 +16,12 @@ class NewScene{
         this.num = Math.random()
         //console.log(this.time.getElapsedTime())
         this.oldTime = 0
-        this.InitTextShader()
-        //this.InitShader()
+        //this.InitTextShader()
+        this.InitShader()
         this.InitCamera()
         //this.InitLights()
         this.InitRenderer()
-        this.InitControls()
+        //this.InitControls()
         this.Update()
         window.addEventListener('resize', () => {
             this.Resize()
@@ -95,7 +95,7 @@ class NewScene{
 
     InitCamera(){
         this.camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 100)
-        this.camera.position.z = 5
+        this.camera.position.z = 3
         this.scene.add(this.camera)
     }
 
@@ -147,8 +147,8 @@ class NewScene{
             
             this.deltaTime = this.elapsedTime - this.oldTime
             this.oldTime = this.elapsedTime
-            this.controls.update()
-            //this.material.uniforms.u_time.value += this.deltaTime
+            //this.controls.update()
+            this.material.uniforms.u_time.value += this.deltaTime
             if (this.textMaterial){
                 this.textMaterial.uniforms.u_time.value += this.deltaTime
                 //this.textMesh.rotation.y += 0.005
