@@ -54,7 +54,7 @@ void main(){
     vUv = vUv * 15. - 7.5;
     vec3 color = vec3(0.);
     vUv = noise2(vUv+u_time) * vUv;
-    float y = plot(vUv, sin(u_time+ TWO_PI));
+    float y = plot(vUv, 50.);
     float y2 = plot2(vUv, cos(u_time+ TWO_PI));
     color = vec3(y);
     gl_FragColor = vec4(color, 1.);
