@@ -1,8 +1,8 @@
 import './style.css'
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/226/fragment.glsl'
-import vertex from './Shaders/226/vertex.glsl'
+import fragment from './Shaders/227/fragment.glsl'
+import vertex from './Shaders/227/vertex.glsl'
 const canvas = document.querySelector('.webgl')
 
 class NewScene{
@@ -88,8 +88,8 @@ class NewScene{
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.scene.add(this.mesh)
         document.onmousemove = (e) => {
-            this.material.uniforms.u_mouse.value.x = e.pageX
-            this.material.uniforms.u_mouse.value.y = e.pageY
+            this.material.uniforms.u_mouse.value.x = (e.pageX / window.innerWidth)
+            this.material.uniforms.u_mouse.value.y = -(e.pageY / window.innerHeight)
         }  
     }
 
