@@ -2,8 +2,8 @@ import './style.css'
 import * as THREE from "three"
 //import * as lygia from 'lygia'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/253/fragment.glsl'
-import vertex from './Shaders/253/vertex.glsl'
+import fragment from './Shaders/254/fragment.glsl'
+import vertex from './Shaders/254/vertex.glsl'
 const canvas = document.querySelector('.webgl')
 
 class NewScene{
