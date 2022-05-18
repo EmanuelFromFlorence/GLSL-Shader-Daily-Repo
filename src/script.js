@@ -1,10 +1,11 @@
 import './style.css'
 import * as THREE from "three"
-//import * as lygia from 'lygia'
+
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/259/fragment.glsl'
-import vertex from './Shaders/259/vertex.glsl'
+import fragment from './Shaders/260/fragment.glsl'
+import vertex from './Shaders/260/vertex.glsl'
 const canvas = document.querySelector('.webgl')
+
 
 class NewScene{
     constructor(){
@@ -15,6 +16,7 @@ class NewScene{
         this.scene = new THREE.Scene()
         this.time = new THREE.Clock()
         this.num = Math.random()
+        //this.lygia = new Lygia()
         //console.log(this.time.getElapsedTime())
         this.oldTime = 0
         //this.InitTextShader()
