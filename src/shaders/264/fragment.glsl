@@ -33,8 +33,6 @@ vec2 Rot(vec2 vUv,float a){
     return vUv;
 }
 
-
-
 vec3 voronoi(vec2 x){
     vec2 n=floor(x);
     vec2 f=fract(x);
@@ -76,19 +74,30 @@ vec3 voronoi(vec2 x){
     return vec3(md, mr);
 }
 
+float cir(vec2 vUv, vec2 pos, float size){
+    float x = smoothstep(size + 0.05, size + 0.06, distance(vUv, pos));
+    float y = smoothstep(size, size + 0.01, distance(vUv, pos));
+    return x * y;
+}
+
 void main(){
     vec2 vUv=vec2(vUv.x,vUv.y);
-    vUv.x += u_time * 0.25;
+    vec2 newUv = vUv;
+    //vUv.x += u_time * 0.25;
+    
+    float c1 = cir(newUv, vec2(0.5), 0.45);
     vec3 color=vec3(0.);
+    color = vec3(c1); 
     //vUv = Rot(vUv, u_time * 0.125);
     vUv=vUv*2.-1.;
-    vUv*=2.5;
+    vUv*=2.5 * sin(u_time * 0.5) + 5.0;
     vUv.x += u_time * 0.125;
     vec3 c=voronoi((vUv));
-    float c1 = cir(vec2 vUv, vec2(0.5), 0.25);
+    
     float dd=length(c.yz);
-    color=1. - mix(vec3(1.),color,smoothstep(.05,.1,c.x));
-    color /= vec3(1.) * (1. - smoothstep(0.01, 0.91, dd ));
-    color*=c.z * c.y / c.x * 50.;
+    
+    color=1. - mix(vec3(1.),color,smoothstep(.05,.04,c.x));
+    //color /= vec3(1.) * (1. - smoothstep(0.01, 0.91, dd ));
+    color*=c.x * 50.;
     gl_FragColor=vec4(color,1.);
 }
