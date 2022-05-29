@@ -24,7 +24,7 @@ class NewScene{
         this.InitCamera()
         //this.InitLights()
         this.InitRenderer()
-        this.InitControls()
+        //this.InitControls()
         this.Update()
         window.addEventListener('resize', () => {
             this.Resize()
@@ -150,7 +150,7 @@ class NewScene{
             
             this.deltaTime = this.elapsedTime - this.oldTime
             this.oldTime = this.elapsedTime
-            this.controls.update()
+            //this.controls.update()
             this.material.uniforms.u_time.value += this.deltaTime
             if (this.textMaterial){
                 this.textMaterial.uniforms.u_time.value += this.deltaTime
