@@ -1,9 +1,8 @@
 import './style.css'
 import * as THREE from "three"
-
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/292/fragment.glsl'
-import vertex from './Shaders/292/vertex.glsl'
+import fragment from './Shaders/293/fragment.glsl'
+import vertex from './Shaders/293/vertex.glsl'
 const canvas = document.querySelector('.webgl')
 
 
@@ -74,6 +73,7 @@ class NewScene{
 
     InitShader(){
         //this.geometry = new THREE.BoxGeometry(2, 2, 2)
+        this.x = 292
         this.geometry = new THREE.PlaneBufferGeometry(2, 2)
         this.material = new THREE.ShaderMaterial({
             transparent: true,
@@ -87,7 +87,7 @@ class NewScene{
                 u_mouse: { type: "v2", value: new THREE.Vector2() }
             } 
         })
-        console.log(fragment)
+        //console.log(fragment)
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.scene.add(this.mesh)
         document.onmousemove = (e) => {
