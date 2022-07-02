@@ -1,8 +1,8 @@
 import './style.css'
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/304/fragment.glsl'
-import vertex from './Shaders/304/vertex.glsl'
+import fragment from './Shaders/305/fragment.glsl'
+import vertex from './Shaders/305/vertex.glsl'
 const canvas = document.querySelector('.webgl')
 
 class NewScene{
