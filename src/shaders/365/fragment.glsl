@@ -186,10 +186,10 @@ void main(){
     //vUv.y -= 0.25;
     //vUv.y += 1.0;
     
-    vec2 v0 = 0.5 * cos(0.15 * u_time + vec2(10., 0.0) + 1.0);
-    vec2 v1 = 0.5 * cos(0.15 * u_time + vec2(0., 1.0) + 2.0);
-    vec2 v2 = 0.5 * cos(0.15 * u_time + vec2(1.0, 0.0) + 3.0);
-    vec2 v3 = 0.5 * cos(0.15 * u_time + vec2(1.0, 1.0) + 4.0);
+    vec2 v0 = 0.5 * cos(0.15 * u_time + vec2(0.0, 0.0) + 1.5);
+    vec2 v1 = 0.5 * cos(0.15 * u_time + vec2(0.0, 4.0) + 2.3);
+    vec2 v2 = 0.5 * cos(0.15 * u_time + vec2(4.0, 2.0) + 3.5);
+    vec2 v3 = 0.5 * cos(0.15 * u_time + vec2(2.0, 0.0) + 4.1);
     vec2 v4 = 0.5 * cos(0.15 * u_time + vec2(1.5, 0.0) + 1.0);
     vec2 v5 = 0.5 * cos(0.15 * u_time + vec2(1.5, 2.5) + 2.0);
     vec2 v6 = 0.5 * cos(0.15 * u_time + vec2(3.0, 0.0) + 3.0);
@@ -198,18 +198,18 @@ void main(){
 
     vec2[] polygon = vec2[](v0, v1, v2, v3);
     vec2[] polygon2 = vec2[](v4, v5, v6, v7);
-    vec2[] polygon3 = vec2[](v6, v7, v8);
+    // vec2[] polygon3 = vec2[](v6, v7, v8);
 
     float d = sdPolygon(vUv, polygon);
     float d2 = sdPolygon(vUv, polygon2);
     //float d3 = sdPolygon(vUv, polygon3);
     vec3 color = vec3(0.);
-    color += exp(-32.0*abs(d));
+    color += exp(-16.0*abs(d));
     color += exp(-32.0*abs(d2));
     //color += exp(-32.0*abs(d3));
 
-    color += smoothstep(0.0, 0.015, d) * vec3(0.2, 0., 0.2); //yellow
-    color += smoothstep(0.0, 0.015, d2) * vec3(0., 0.2, 0.); //teal
+    color += smoothstep(0.0, 0.015, d * d2) * vec3(0.2, 0., 0.2); //yellow
+    //color += smoothstep(0.0, 0.015, d2) * vec3(0., 0.2, 0.); //teal
     //color += smoothstep(0.0, 0.015, d3) * vec3(0.1, 0., 0.); //teal
     // color += smoothstep(0.0, 0.015, y3) * vec3(0.5, 1., .5); //green
     // color += smoothstep(0.0, 0.015, y4) * vec3(1., 0., 0.); //red
