@@ -1,4 +1,9 @@
 # GLSL-Shader-Daily-Repo
-@shader_daily (twitter) - Challenge: Share one shader everyday for 365 days! Take on the challenge? 
+-terminal-
+npm install
+npm run dev
 
-Challenge complete! Take the challenge! 
+-go to script.js
+-change the shader folder for vertex and fragment
+
+-Have FUN!
