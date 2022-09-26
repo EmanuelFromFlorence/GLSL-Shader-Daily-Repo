@@ -40,15 +40,15 @@ void main()
     float b11 = rect(vec2(vUv.x + 0.265, vUv.y + 0.445 ), 0.14, 0.22);
 
     color.r = b1 * (sin(u_time * 0.1));
-    color.r += b2 * (sin(u_time * 0.2));
-    color.g += b3 * (sin(u_time * 0.3));
-    color.g += b4 * (sin(u_time * 0.4));
+    color.b += b2 * (sin(u_time * 0.2));
+    color.rgb += b3 * (sin(u_time * 0.3));
+    color.rg += b4 * (sin(u_time * 0.4));
     color.b += b5 * (sin(u_time * 0.5));
-    color.b += b6 * (sin(u_time * 0.6));
+    color.rgb += b6 * (sin(u_time * 0.6));
     color.r += b7 * (sin(u_time * 0.7));
-    color.g += b8 * (sin(u_time * 0.8));
-    color.r += b9 * (sin(u_time * 0.9));
-    color.b += b10 * (sin(u_time * 0.11));
-    color.g += b11 * (sin(u_time * 0.12));
+    color.rg += b8 * (sin(u_time * 0.8));
+    color.rg += b9 * (sin(u_time * 0.9));
+    color.rgb += b10 * (sin(u_time * 0.11));
+    color.r += b11 * (sin(u_time * 0.12));
     gl_FragColor = vec4(color, 1.);
 }
