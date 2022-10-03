@@ -45,16 +45,16 @@ void main()
     float r3 = rect(vUv1, 0.2, 0.7);
     
 
-    float r4 = rect(vUv2, 0.25, 0.25);
+    float r4 = rect(vUv2, 0.15, 0.45);
     float r5 = 1. - rect(vUv2, 0.55, 0.55);
-    float r6 = rect(vUv2, 0.1, 0.1);
+    float r6 = rect(vUv2, 0.82, 0.1);
     
     color += r1;
     color -= r2;
     color -= r3;
-    color += r4;
+    color -= r4;
     color -= r5;
-    color -= r6;
+    color += r6;
 
     gl_FragColor = vec4(color, 1.);
 }
