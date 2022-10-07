@@ -50,15 +50,15 @@ void main()
     vec2 vUv = vec2(vUv.x, vUv.y);
     vec3 color = vec3(0.);
 
-    float r1 = rectOutline(vUv, 0.3 - (0.04 * 6.5) * sin(u_time), 0.3 - (0.04 * 8.));
-    float r2 = rectOutline(vUv, 0.3 - (0.03 * 6.5) * sin(u_time), 0.3 - (0.03 * 8.));
-    float r3 = rectOutline(vUv, 0.3 - (0.02 * 6.5) * sin(u_time), 0.3 - (0.02 * 8.));
-    float r4 = rectOutline(vUv, 0.3 - (0.01 * 6.5) * sin(u_time), 0.3 - (0.01 * 8.));
-    float r5 = rectOutline(vUv, 0.3 + (0.00 * 6.5) * sin(u_time), 0.3 + (0.00 * 8.));
-    float r6 = rectOutline(vUv, 0.3 + (0.01 * 6.5) * sin(u_time), 0.3 + (0.01 * 8.));
-    float r7 = rectOutline(vUv, 0.3 + (0.02 * 6.5) * sin(u_time), 0.3 + (0.02 * 8.));
-    float r8 = rectOutline(vUv, 0.3 + (0.03 * 6.5) * sin(u_time), 0.3 + (0.03 * 8.));
-    float r9 = rectOutline(vUv, 0.3 + (0.04 * 6.5) * sin(u_time), 0.3 + (0.04 * 8.));
+    float r1 = rectOutline(vUv, 0.3 - (0.04 * 6.5) * sin(u_time), 0.3 - (0.04 * 6.5) * cos(u_time));
+    float r2 = rectOutline(vUv, 0.3 - (0.03 * 6.5) * sin(u_time), 0.3 - (0.03 * 6.5) * cos(u_time));
+    float r3 = rectOutline(vUv, 0.3 - (0.02 * 6.5) * sin(u_time), 0.3 - (0.02 * 6.5) * cos(u_time));
+    float r4 = rectOutline(vUv, 0.3 - (0.01 * 6.5) * sin(u_time), 0.3 - (0.01 * 6.5) * cos(u_time));
+    float r5 = rectOutline(vUv, 0.3 + (0.00 * 6.5) * sin(u_time), 0.3 + (0.00 * 6.5) * cos(u_time));
+    float r6 = rectOutline(vUv, 0.3 + (0.01 * 6.5) * sin(u_time), 0.3 + (0.01 * 6.5) * cos(u_time));
+    float r7 = rectOutline(vUv, 0.3 + (0.02 * 6.5) * sin(u_time), 0.3 + (0.02 * 6.5) * cos(u_time));
+    float r8 = rectOutline(vUv, 0.3 + (0.03 * 6.5) * sin(u_time), 0.3 + (0.03 * 6.5) * cos(u_time));
+    float r9 = rectOutline(vUv, 0.3 + (0.04 * 6.5) * sin(u_time), 0.3 + (0.04 * 6.5) * cos(u_time));
 
     color += r1 + r2 + r3 + r4 + r5 + r6 + r7 + r8 + r9;
 
