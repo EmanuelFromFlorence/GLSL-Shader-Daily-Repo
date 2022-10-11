@@ -49,13 +49,14 @@ void main()
 {
     vec2 vUv = vec2(vUv.x, vUv.y);
     vec3 color = vec3(0.);
+    //vUv = Rot(vUv, (u_time * 0.25));
     vUv = vUv * 4. - 2.;
-
+    
     float d = 1. - length(max(abs(vUv) - .3, 0.));
 
-    d = fract((d * 2. + (u_time * 0.75)));
-    d = smoothstep(0.3, 0.4, d) * smoothstep(0.6, 0.5, d);
-    color += d;
+    d = fract((d + d * d * d * 2. - (u_time * 0.75)));
+    d /= smoothstep(0.3, 0.31, d) * smoothstep(0.4, 0.41, d);
+    color += 1. - d;
 
     gl_FragColor = vec4(color, 1.);
 }
