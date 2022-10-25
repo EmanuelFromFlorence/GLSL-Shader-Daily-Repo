@@ -1,8 +1,8 @@
 import './style.css'
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/395/fragment.glsl'
-import vertex from './Shaders/395/vertex.glsl'
+import fragment from './Shaders/396/fragment.glsl'
+import vertex from './Shaders/396/vertex.glsl'
 const canvas = document.querySelector('.webgl')
 
 class NewScene{
@@ -74,6 +74,9 @@ class NewScene{
         //this.geometry = new THREE.BoxGeometry(2, 2, 2)
         this.geometry = new THREE.PlaneBufferGeometry(2, 2)
         this.material = new THREE.ShaderMaterial({
+            extensions: {
+                derivatives: "#extension GL_OES_standard_derivatives: enable",
+            },
             transparent: true,
             side: THREE.DoubleSide,
             vertexShader: vertex,

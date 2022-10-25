@@ -4,7 +4,7 @@ varying vec2 vUv;
 uniform float u_time;
 uniform vec2 u_resolution;
 
-//shapes week 1 
+//#include "../../../lygia/math/const.glsl"
 
 float rect( vec2 vUv, float height, float width)
 {
@@ -22,11 +22,11 @@ float rectOutline(vec2 vUv, float height, float width)
     return x - y;
 }
 
-float circle(vec2 vUv, float radius)
-{
-    vec2 dist = vUv - vec2(0.5);
-    return 1. - smoothstep(radius - (radius * 0.05), radius + (radius * 0.05), dot(dist, dist) * 4.);
-}
+// float circle(vec2 vUv, float radius)
+// {
+//     vec2 dist = vUv - vec2(0.5);
+//     return 1. - smoothstep(radius - (radius * 0.05), radius + (radius * 0.05), dot(dist, dist) * 4.);
+// }
 
 float cirOutline(vec2 vUv, float r)
 {
