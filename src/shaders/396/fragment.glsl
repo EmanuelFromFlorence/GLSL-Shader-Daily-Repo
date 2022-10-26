@@ -4,7 +4,7 @@ varying vec2 vUv;
 uniform float u_time;
 uniform vec2 u_resolution;
 
-//#include "../../../lygia/math/const.glsl"
+//#include "../../src/lygia/draw/circle.glsl"
 
 float rect( vec2 vUv, float height, float width)
 {
@@ -71,7 +71,7 @@ float polygonOutline(vec2 vUv, int N, float size)
     float r = TWO_PI/float(N);
     float d = cos(floor(.5+a/r) * r -a) * length(vUv);
    float x = 1. - smoothstep(size, size + 0.01, d);
-   float y = 1. - smoothstep(size + 0.000005, size + 0.225 + 0.01, d);
+   float y = 1. - smoothstep(size + 0.01, size + 0.521 + 0.01, d);
    return y - x;
 }
 
@@ -105,11 +105,72 @@ float spike(vec2 vUv, int N, float size)
    return y - x;
 }
 
+vec2 scale(vec2 vUv){
+    vUv -= vec2(0.5);
+    vUv = vec2(sin(u_time) + 1.0) * vUv;
+    vUv += vec2(0.5);
+    return vUv;
+}
+
+vec2 scale2(vec2 vUv){
+    vUv -= vec2(0.5);
+    vUv = vec2(sin(u_time) + 2.0) * vUv;
+    vUv += vec2(0.5);
+    return vUv;
+}
+
+vec2 scale3(vec2 vUv){
+    vUv -= vec2(0.5);
+    vUv = vec2(sin(u_time) + 3.0) * vUv;
+    vUv += vec2(0.5);
+    return vUv;
+}
+
+vec2 scale4(vec2 vUv){
+    vUv -= vec2(0.5);
+    vUv = vec2(sin(u_time) + 4.0) * vUv;
+    vUv += vec2(0.5);
+    return vUv;
+}
+
+vec2 scale5(vec2 vUv){
+    vUv -= vec2(0.5);
+    vUv = vec2(sin(u_time) + 0.6) * vUv;
+    vUv += vec2(0.5);
+    return vUv;
+}
+
 void main()
 {
     vec2 vUv = vec2(vUv.x, vUv.y);
     vec3 color = vec3(0.);
     
+    vec2 vUv1 = vUv;
+    vec2 vUv2 = vUv;
+    vec2 vUv3 = vUv;
+    vec2 vUv4 = vUv;
+    vec2 vUv5 = vUv;
+    //vUv1 = Rot(vUv1, u_time * 0.5);
+    vUv2, vUv3, vUv4, vUv5 = vUv1;
+    vUv1 = scale(vUv1);
+    vUv2 = scale2(vUv2);
+    vUv3 = scale3(vUv3);
+    vUv4 = scale4(vUv4);
+    vUv5 = scale5(vUv5);
+    vec2 translate = vec2(cos(u_time), sin(u_time));
+    //vUv1 += translate * 0.25;
+
+    float s1 = polygonOutline(vUv1, 4, 0.15);
+
+    float s2 = polygonOutline(vUv2, 4, 0.25);
+
+    float s3 = polygonOutline(vUv3, 4, 0.35);
+
+    float s4 = polygonOutline(vUv4, 4, 0.45);
+
+    float s5 = polygonOutline(vUv5, 4, 0.55);
+
+    color += s1 + s2 + s3 + s4 + s5;
 
     gl_FragColor = vec4(color, 1.);
 }
