@@ -207,8 +207,12 @@ void main()
 {
     vec2 vUv = vec2(vUv.x, vUv.y);
     vec3 color = vec3(0.);
+    float val1 = (sin(u_time * 0.5)/2.);
+    float val2 = (sin(u_time * 1.0)/3.);
+    float val3 = (sin(u_time * 1.5)/4.);
+    float val4 = (sin(u_time * 2.0)/5.);
 
-    float x = sdRoundedBox(vUv, vec2(0.5, 0.5), vec4(0.0 + sin(u_time), 0.0 + sin(u_time), 0.0 + sin(u_time), 0.0 + sin(u_time)));
+    float x = sdRoundedBox(vUv, vec2(0.5, 0.5), vec4(0.0 + val1, 0.0 + val2, 0.0 + val3, 0.0 + val4));
 
     color = vec3(x);
 
