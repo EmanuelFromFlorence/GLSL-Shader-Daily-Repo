@@ -1,8 +1,8 @@
 import './style.css'
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/413/fragment.glsl'
-import vertex from './Shaders/413/vertex.glsl'
+import fragment from './Shaders/414/fragment.glsl'
+import vertex from './Shaders/414/vertex.glsl'
 import * as lygia from 'lygia'
 console.log(lygia)
 
