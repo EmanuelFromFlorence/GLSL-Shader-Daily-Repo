@@ -7,3 +7,5 @@ npm run dev
 -change the shader folder for vertex and fragment
 
 -Have FUN!
+
+*updated Repo has moved to shaderdaily_r3f repo! :)
