@@ -1,6 +1,6 @@
-// #ifdef GL_ES
-// precision mediump float;
-// #endif
+#ifdef GL_ES
+precision lowp float;
+#endif
 
 varying vec2 vUv;
 #define PI 3.14159265359
