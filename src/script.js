@@ -1,10 +1,17 @@
 import './style.css'
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/416/fragment.glsl'
-import vertex from './Shaders/416/vertex.glsl'
-import * as lygia from 'lygia'
-console.log(lygia)
+import fragment from './Shaders/448/fragment.glsl'
+// import vertex from './Shaders/416/vertex.glsl'
+// import defaultVertex from './shaders/defaultVertex/vertex.js'
+import vertexShader from './shaders/defaultVertex/vertex.glsl'
+import preload from './shaders/preload/preload.glsl'
+import usefulFunctions from './shaders/usefulFunctions/usefulFunctions.glsl'
+import numbers from './shaders/numLabels/numbers.glsl'
+console.log(preload)
+console.log(usefulFunctions)
+console.log(numbers)
+console.log(fragment)
 
 const canvas = document.querySelector('.webgl')
 
@@ -55,8 +62,8 @@ class NewScene{
                 this.textMaterial = new THREE.ShaderMaterial({
                     transparent: true,
                     side: THREE.DoubleSide,
-                    vertexShader: vertex,
-                    fragmentShader: fragment,
+                    vertexShader: vertexShader,
+                    fragmentShader: preload + usefulFunctions + numbers + fragment,
                     uniforms: {
                         u_time: { value: 1.0 },
                         u_rand: { value: 0},
@@ -82,8 +89,8 @@ class NewScene{
             },
             transparent: true,
             side: THREE.DoubleSide,
-            vertexShader: vertex,
-            fragmentShader: fragment,
+            vertexShader: vertexShader,
+            fragmentShader: preload + usefulFunctions + numbers + fragment,
             uniforms: {
                 u_time: { type: "f", value: 1.0 },
                 u_rand: { value: 0},
