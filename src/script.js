@@ -1,16 +1,17 @@
 import './style.css'
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import fragment from './Shaders/449/fragment.glsl'
+// import fragment from './Shaders/449/fragment.glsl'
+import fragment from './shaders/447/fragment.glsl'
 // import vertex from './Shaders/416/vertex.glsl'
 // import defaultVertex from './shaders/defaultVertex/vertex.js'
 import vertexShader from './shaders/defaultVertex/vertex.glsl'
 import preload from './shaders/preload/preload.glsl'
 import usefulFunctions from './shaders/usefulFunctions/usefulFunctions.glsl'
 import numbers from './shaders/numLabels/numbers.glsl'
-console.log(preload)
-console.log(usefulFunctions)
-console.log(numbers)
+// console.log(preload)
+// console.log(usefulFunctions)
+// console.log(numbers)
 console.log(fragment)
 
 const canvas = document.querySelector('.webgl')
